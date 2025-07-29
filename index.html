@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arix & Co| Wedding Planning & Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #fffaf5;
+        }
+        
+        .playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80") center/cover no-repeat;
+            height: 90vh;
+            position: relative;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(248, 179, 197, 0.3) 0%, rgba(248, 179, 197, 0.1) 100%);
+            z-index: 1;
+        }
+        
+        .hero-section > div {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #f8b3c5;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        /* Cards and Elements */
+        .service-card {
+            transition: all 0.4s ease;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-card {
+            transition: all 0.4s ease;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+        }
+        
+        .gallery-img {
+            transition: all 0.4s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .gallery-img:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Buttons */
+        .gradient-button {
+            background-size: 200% auto;
+            background-image: linear-gradient(to right, #f8b3c5 0%, #f8d0c5 51%, #f8b3c5 100%);
+            transition: 0.5s;
+        }
+        
+        .gradient-button:hover {
+            background-position: right center;
+        }
+        
+        /* Fade-in Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Floating elements */
+        .float-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(-100%);
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Testimonial slider */
+        .testimonial-container {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .testimonial-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        /* Gallery lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        /* Form elements */
+        input:focus, textarea:focus, select:focus {
+            border-color: #f8b3c5;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(248, 179, 197, 0.2);
+        }
+        
+        /* Custom checkbox */
+        .custom-checkbox {
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 2px solid #f8b3c5;
+            border-radius: 4px;
+        }
+        
+        .custom-checkbox:hover input ~ .checkmark {
+            background-color: #f8f0f2;
+        }
+        
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: #f8b3c5;
+        }
+        
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+        
+        .custom-checkbox .checkmark:after {
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Back to top button */
+        #back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 80vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="flex items-center">
+                    <span class="playfair text-2xl md:text-3xl font-bold text-rose-400">Arix & Co<span class="text-gray-800"></span></span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link active text-gray-700 hover:text-rose-400 transition-colors">Home</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-rose-400 transition-colors">About</a>
+                    <a href="#services" class="nav-link text-gray-700 hover:text-rose-400 transition-colors">Services</a>
+                    <a href="#gallery" class="nav-link text-gray-700 hover:text-rose-400 transition-colors">Gallery</a>
+                    <a href="#testimonials" class="nav-link text-gray-700 hover:text-rose-400 transition-colors">Testimonials</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-rose-400 transition-colors">Contact</a>
+                </div>
+                <a href="#booking" class="hidden md:block gradient-button text-white px-6 py-2 rounded-full transition-all shadow-md hover:shadow-lg">
+                    Book Consultation
+                </a>
+                <button class="md:hidden text-gray-700" id="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu md:hidden fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50" id="mobile-menu">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                <span class="playfair text-xl font-bold text-rose-400">Arix & Co </span>
+                <button id="close-menu-button" class="text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="p-4 flex flex-col space-y-4">
+                <a href="#home" class="text-gray-700 hover:text-rose-400 transition-colors py-2">Home</a>
+                <a href="#about" class="text-gray-700 hover:text-rose-400 transition-colors py-2">About</a>
+                <a href="#services" class="text-gray-700 hover:text-rose-400 transition-colors py-2">Services</a>
+                <a href="#gallery" class="text-gray-700 hover:text-rose-400 transition-colors py-2">Gallery</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-rose-400 transition-colors py-2">Testimonials</a>
+                <a href="#contact" class="text-gray-700 hover:text-rose-400 transition-colors py-2">Contact</a>
+                <a href="#booking" class="gradient-button text-white px-6 py-2 rounded-full transition-all shadow-md hover:shadow-lg text-center mt-4">
+                    Book Consultation
+                </a>
+            </div>
+        </div>
+        <div class="mobile-menu-overlay fixed inset-0 bg-black bg-opacity-50 z-40 hidden" id="mobile-menu-overlay"></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section flex items-center justify-center">
+        <div class="container mx-auto px-4 text-center">
+            <div class="animate-fadeIn">
+                <h1 class="playfair text-4xl md:text-6xl font-bold text-white mb-4">Your Perfect Day, Perfectly Planned</h1>
+                <p class="text-white text-lg md:text-xl mb-8 max-w-2xl mx-auto">Creating unforgettable wedding experiences with meticulous planning and exquisite attention to detail.</p>
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="#services" class="gradient-button text-white px-8 py-3 rounded-full transition-all shadow-lg hover:shadow-xl text-lg">
+                        Our Services
+                    </a>
+                    <a href="#contact" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-rose-400 px-8 py-3 rounded-full transition-all shadow-lg hover:shadow-xl text-lg">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-rose-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 fade-in">
+                    <h2 class="playfair text-3xl md:text-4xl font-bold text-gray-800 mb-6">About Arix & Co</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">At Arix & Co , we believe that your wedding day should be as unique as your love story. With over a decade of experience in wedding planning and management, our dedicated team of professionals is committed to turning your dreams into reality.</p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">From intimate gatherings to grand celebrations, we handle every detail with precision and care, ensuring that your special day unfolds seamlessly, allowing you to create memories that will last a lifetime.</p>
+                    <div class="flex items-center gap-6">
+                        <div class="text-center">
+                            <p class="playfair text-4xl font-bold text-rose-400">500+</p>
+                            <p class="text-gray-600">Weddings</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="playfair text-4xl font-bold text-rose-400">10+</p>
+                            <p class="text-gray-600">Years</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="playfair text-4xl font-bold text-rose-400">100%</p>
+                            <p class="text-gray-600">Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 fade-in">
+                    <div class="relative float-element">
+                        <div class="bg-rose-200 rounded-lg w-full h-80 md:h-96"></div>
+                        <div class="absolute top-6 right-6 bottom-6 left-6 bg-white p-4 rounded-lg shadow-lg">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Wedding Planning Team" class="w-full h-full object-cover rounded">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="playfair text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Comprehensive Services</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">From the initial concept to the final farewell, we offer a complete range of wedding planning and management services to create your perfect day.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Photography Service -->
+                <div class="service-card bg-white rounded-lg shadow-lg overflow-hidden fade-in">
+                    <div class="h-48 bg-rose-100 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Photography Services" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="playfair text-xl font-bold text-gray-800 mb-3">Photography & Videography</h3>
+                        <p class="text-gray-600 mb-4">Capture every precious moment of your special day with our professional photography and videography services. Our talented team will create stunning visual memories that you'll cherish forever.</p>
+                        <a href="#booking" class="text-rose-400 hover:text-rose-500 font-medium flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Catering Service -->
+                <div class="service-card bg-white rounded-lg shadow-lg overflow-hidden fade-in">
+                    <div class="h-48 bg-rose-100 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Catering Services" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="playfair text-xl font-bold text-gray-800 mb-3">Catering & Cuisine</h3>
+                        <p class="text-gray-600 mb-4">Delight your guests with exquisite cuisine and impeccable service. From elegant plated dinners to lavish buffets, our catering partners create memorable dining experiences tailored to your taste.</p>
+                        <a href="#booking" class="text-rose-400 hover:text-rose-500 font-medium flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Decoration Service -->
+                <div class="service-card bg-white rounded-lg shadow-lg overflow-hidden fade-in">
+                    <div class="h-48 bg-rose-100 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Decoration Services" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="playfair text-xl font-bold text-gray-800 mb-3">Decor & Floral Design</h3>
+                        <p class="text-gray-600 mb-4">Transform your venue into a magical setting with our stunning decorations and floral arrangements. Our design team creates breathtaking environments that reflect your personal style and vision.</p>
+                        <a href="#booking" class="text-rose-400 hover:text-rose-500 font-medium flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Venue Service -->
+                <div class="service-card bg-white rounded-lg shadow-lg overflow-hidden fade-in">
+                    <div class="h-48 bg-rose-100 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Venue Selection" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="playfair text-xl font-bold text-gray-800 mb-3">Venue Selection</h3>
+                        <p class="text-gray-600 mb-4">Discover the perfect location for your dream wedding, from elegant ballrooms to scenic outdoor settings. We'll help you find and secure a venue that matches your vision and accommodates your guests.</p>
+                        <a href="#booking" class="text-rose-400 hover:text-rose-500 font-medium flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Entertainment Service -->
+                <div class="service-card bg-white rounded-lg shadow-lg overflow-hidden fade-in">
+                    <div class="h-48 bg-rose-100 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Entertainment Services" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="playfair text-xl font-bold text-gray-800 mb-3">Entertainment & Music</h3>
+                        <p class="text-gray-600 mb-4">Keep your guests entertained with our selection of professional musicians, DJs, and specialty performers. We'll help you create the perfect atmosphere for every moment of your celebration.</p>
+                        <a href="#booking" class="text-rose-400 hover:text-rose-500 font-medium flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Planning Service -->
+                <div class="service-card bg-white rounded-lg shadow-lg overflow-hidden fade-in">
+                    <div class="h-48 bg-rose-100 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1450082023288-b00c3dac0b5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Wedding Planning" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="playfair text-xl font-bold text-gray-800 mb-3">Full Wedding Planning</h3>
+                        <p class="text-gray-600 mb-4">From concept to execution, our comprehensive planning services handle every aspect of your wedding. Relax and enjoy your engagement while we take care of the details, timelines, and coordination.</p>
+                        <a href="#booking" class="text-rose-400 hover:text-rose-500 font-medium flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 fade-in">
+                <a href="#booking" class="gradient-button text-white px-8 py-3 rounded-full transition-all shadow-md hover:shadow-lg text-lg">
+                    Book Our Services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="playfair text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Wedding Gallery</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Browse through our portfolio of beautiful weddings we've had the privilege to plan and organize.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Gallery Image 1 -->
+                <div class="gallery-img cursor-pointer fade-in" data-img="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" data-title="Elegant Floral Arrangements">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Elegant Floral Arrangements" class="w-full h-64 object-cover rounded-lg">
+                </div>
+                
+                <!-- Gallery Image 2 -->
+                <div class="gallery-img cursor-pointer fade-in" data-img="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" data-title="Romantic Ceremony Setup">
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Romantic Ceremony Setup" class="w-full h-64 object-cover rounded-lg">
+                </div>
+                
+                <!-- Gallery Image 3 -->
+                <div class="gallery-img cursor-pointer fade-in" data-img="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" data-title="Beach Wedding">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Beach Wedding" class="w-full h-64 object-cover rounded-lg">
+                </div>
+                
+                <!-- Gallery Image 4 -->
+                <div class="gallery-img cursor-pointer fade-in" data-img="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" data-title="First Dance">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="First Dance" class="w-full h-64 object-cover rounded-lg">
+                </div>
+                
+                <!-- Gallery Image 5 -->
+                <div class="gallery-img cursor-pointer fade-in" data-img="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" data-title="Wedding Reception">
+                    <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Wedding Reception" class="w-full h-64 object-cover rounded-lg">
+                </div>
+                
+                <!-- Gallery Image 6 -->
+                <div class="gallery-img cursor-pointer fade-in" data-img="https://images.unsplash.com/photo-1507504031003-b417219a0fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" data-title="Wedding Cake">
+                    <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Wedding Cake" class="w-full h-64 object-cover rounded-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox for Gallery -->
+    <div class="lightbox" id="gallery-lightbox">
+        <span class="close-lightbox cursor-pointer absolute top-4 right-4 text-white text-4xl">&times;</span>
+        <img src="" alt="" class="max-h-[80vh] max-w-[90vw]" id="lightbox-img">
+        <div class="text-white text-center mt-4 text-xl" id="lightbox-caption"></div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-rose-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="playfair text-3xl md:text-4xl font-bold text-gray-800 mb-4">What Our Couples Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Hear from couples who trusted us with their special day.</p>
+            </div>
+            
+            <div class="testimonial-container fade-in">
+                <div class="testimonial-slider">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-slide px-4 w-full md:w-1/2 lg:w-1/3 flex-shrink-0">
+                        <div class="testimonial-card bg-white rounded-lg shadow-lg p-6 h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-rose-200 flex items-center justify-center mr-4">
+                                    <span class="text-rose-500 font-bold">S&M</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Sarah & Michael</h4>
+                                    <p class="text-gray-500 text-sm">June 2023</p>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                            <p class="text-gray-600 italic">"Our wedding day was absolutely perfect thanks to the amazing team at Arix & Ca! Every detail was handled with care and professionalism. We couldn't have asked for a better experience."</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-slide px-4 w-full md:w-1/2 lg:w-1/3 flex-shrink-0">
+                        <div class="testimonial-card bg-white rounded-lg shadow-lg p-6 h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-rose-200 flex items-center justify-center mr-4">
+                                    <span class="text-rose-500 font-bold">J&D</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Jessica & David</h4>
+                                    <p class="text-gray-500 text-sm">August 2023</p>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                            <p class="text-gray-600 italic">"We could not have asked for a better wedding planning experience. From the flowers to the venue, everything exceeded our expectations! The team was responsive, creative, and made our vision come to life."</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-slide px-4 w-full md:w-1/2 lg:w-1/3 flex-shrink-0">
+                        <div class="testimonial-card bg-white rounded-lg shadow-lg p-6 h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-rose-200 flex items-center justify-center mr-4">
+                                    <span class="text-rose-500 font-bold">E&J</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Emily & James</h4>
+                                    <p class="text-gray-500 text-sm">July 2023</p>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                            <p class="text-gray-600 italic">"The team at Arix & Co went above and beyond to make our special day stress-free and magical. Their attention to detail and ability to handle unexpected challenges was impressive. Highly recommend their services!"</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center mt-8 space-x-2">
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-rose-300 active"></button>
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300"></button>
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300"></button>
+                </div>
+                
+                <div class="flex justify-center mt-4">
+                    <button class="testimonial-prev bg-white text-rose-400 hover:text-rose-500 p-2 rounded-full shadow-md mr-4">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="testimonial-next bg-white text-rose-400 hover:text-rose-500 p-2 rounded-full shadow-md">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-2/3 fade-in">
+                    <h2 class="playfair text-3xl font-bold text-gray-800 mb-6">Book Your Consultation</h2>
+                    <p class="text-gray-600 mb-8">Fill out the form below to schedule a personalized consultation with our wedding planning experts. We'll help you create the wedding of your dreams.</p>
+                    
+                    <form id="booking-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="first-name" class="block text-gray-700 mb-2">First Name *</label>
+                                <input type="text" id="first-name" name="first-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400" required>
+                            </div>
+                            <div>
+                                <label for="last-name" class="block text-gray-700 mb-2">Last Name *</label>
+                                <input type="text" id="last-name" name="last-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="email" class="block text-gray-700 mb-2">Email Address *</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400" required>
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-700 mb-2">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="event-date" class="block text-gray-700 mb-2">Wedding Date (Tentative) *</label>
+                                <input type="date" id="event-date" name="event-date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400" required>
+                            </div>
+                            <div>
+                                <label for="guest-count" class="block text-gray-700 mb-2">Estimated Guest Count *</label>
+                                <input type="number" id="guest-count" name="guest-count" min="1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="venue-preference" class="block text-gray-700 mb-2">Venue Preference</label>
+                                <select id="venue-preference" name="venue-preference" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400">
+                                    <option value="">Select an option</option>
+                                    <option value="Indoor">Indoor</option>
+                                    <option value="Outdoor">Outdoor</option>
+                                    <option value="Beach">Beach</option>
+                                    <option value="Garden">Garden</option>
+                                    <option value="Historic">Historic Venue</option>
+                                    <option value="Hotel">Hotel/Resort</option>
+                                    <option value="Restaurant">Restaurant</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="budget" class="block text-gray-700 mb-2">Approximate Budget ($)</label>
+                                <input type="number" id="budget" name="budget" min="1000" step="1000" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 mb-2">Services Interested In (Select all that apply)</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="flex items-center">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="services[]" value="Photography">
+                                        <span class="checkmark"></span>
+                                        Photography
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="services[]" value="Catering">
+                                        <span class="checkmark"></span>
+                                        Catering
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="services[]" value="Decoration">
+                                        <span class="checkmark"></span>
+                                        Decoration
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="services[]" value="Venue">
+                                        <span class="checkmark"></span>
+                                        Venue Selection
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="services[]" value="Entertainment">
+                                        <span class="checkmark"></span>
+                                        Entertainment
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="services[]" value="Planning">
+                                        <span class="checkmark"></span>
+                                        Full Planning
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="special-requests" class="block text-gray-700 mb-2">Special Requests or Additional Information</label>
+                            <textarea id="special-requests" name="special-requests" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400"></textarea>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="gradient-button text-white px-8 py-3 rounded-lg transition-all shadow-md hover:shadow-lg text-lg">
+                                Submit Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/3 fade-in">
+                    <div class="bg-rose-50 p-8 rounded-lg shadow-lg h-full">
+                        <h3 class="playfair text-2xl font-bold text-gray-800 mb-6">What Happens Next?</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-rose-200 rounded-full p-3 mr-4 shrink-0">
+                                    <span class="text-rose-500 font-bold">1</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Submit Your Request</h4>
+                                    <p class="text-gray-600">Fill out the form with your wedding details and preferences.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-rose-200 rounded-full p-3 mr-4 shrink-0">
+                                    <span class="text-rose-500 font-bold">2</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Confirmation</h4>
+                                    <p class="text-gray-600">We'll contact you within 24 hours to confirm your consultation.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-rose-200 rounded-full p-3 mr-4 shrink-0">
+                                    <span class="text-rose-500 font-bold">3</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Initial Consultation</h4>
+                                    <p class="text-gray-600">Meet with our wedding planning experts to discuss your vision.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-rose-200 rounded-full p-3 mr-4 shrink-0">
+                                    <span class="text-rose-500 font-bold">4</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Custom Proposal</h4>
+                                    <p class="text-gray-600">Receive a tailored proposal based on your needs and budget.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-rose-200 rounded-full p-3 mr-4 shrink-0">
+                                    <span class="text-rose-500 font-bold">5</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Begin Planning</h4>
+                                    <p class="text-gray-600">Once you approve the proposal, we'll start bringing your dream wedding to life!</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-6 bg-white rounded-lg shadow-sm">
+                            <h4 class="font-bold text-gray-800 mb-4">Contact Information</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-phone text-rose-400 mr-3"></i>
+                                    <span>(555) 123-4567</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-envelope text-rose-400 mr-3"></i>
+                                    <span>info@arix&Ca.com</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt text-rose-400 mr-3"></i>
+                                    <span>123 Wedding Lane, Suite 101<br>Celebration City, WD 12345</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="playfair text-3xl md:text-4xl font-bold text-gray-800 mb-4">Get in Touch</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Have questions or ready to start planning your dream wedding? Contact us today.</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2 fade-in">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="contact-name" class="block text-gray-700 mb-2">Your Name *</label>
+                            <input type="text" id="contact-name" name="contact-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400" required>
+                        </div>
+                        
+                        <div>
+                            <label for="contact-email" class="block text-gray-700 mb-2">Email Address *</label>
+                            <input type="email" id="contact-email" name="contact-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400" required>
+                        </div>
+                        
+                        <div>
+                            <label for="contact-subject" class="block text-gray-700 mb-2">Subject *</label>
+                            <input type="text" id="contact-subject" name="contact-subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400" required>
+                        </div>
+                        
+                        <div>
+                            <label for="contact-message" class="block text-gray-700 mb-2">Message *</label>
+                            <textarea id="contact-message" name="contact-message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400" required></textarea>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="gradient-button text-white px-8 py-3 rounded-lg transition-all shadow-md hover:shadow-lg text-lg">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="md:w-1/2 fade-in">
+                    <div class="bg-white p-8 rounded-lg shadow-lg h-full">
+                        <h3 class="playfair text-2xl font-bold text-gray-800 mb-6">Visit Our Office</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-rose-100 p-3 rounded-full mr-4 shrink-0">
+                                    <i class="fas fa-map-marker-alt text-rose-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Address</h4>
+                                    <p class="text-gray-600">123 Wedding Lane, Suite 101<br>Celebration City, WD 12345</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-rose-100 p-3 rounded-full mr-4 shrink-0">
+                                    <i class="fas fa-phone text-rose-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Phone</h4>
+                                    <p class="text-gray-600">(555) 123-4567</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-rose-100 p-3 rounded-full mr-4 shrink-0">
+                                    <i class="fas fa-envelope text-rose-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Email</h4>
+                                    <p class="text-gray-600">info@arix&Ca.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-rose-100 p-3 rounded-full mr-4 shrink-0">
+                                    <i class="fas fa-clock text-rose-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Office Hours</h4>
+                                    <p class="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="mt-8">
+                            <h4 class="font-bold text-gray-800 mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-rose-100 hover:bg-rose-200 text-rose-500 p-3 rounded-full transition-colors">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="bg-rose-100 hover:bg-rose-200 text-rose-500 p-3 rounded-full transition-colors">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="bg-rose-100 hover:bg-rose-200 text-rose-500 p-3 rounded-full transition-colors">
+                                    <i class="fab fa-pinterest-p"></i>
+                                </a>
+                                <a href="#" class="bg-rose-100 hover:bg-rose-200 text-rose-500 p-3 rounded-full transition-colors">
+                                    <i class="fab fa-tiktok"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="fade-in">
+                    <h3 class="playfair text-xl font-bold mb-4">Arix & Co </h3>
+                    <p class="text-gray-400 mb-4">Creating unforgettable wedding experiences with meticulous planning and exquisite attention to detail.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-white transition-colors">Gallery</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition-colors">Testimonials</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="fade-in">
+                    <h3 class="text-lg font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Photography & Videography</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Catering & Cuisine</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Decor & Floral Design</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Venue Selection</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Entertainment & Music</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Full Wedding Planning</a></li>
+                    </ul>
+                </div>
+                
+                <div class="fade-in">
+                    <h3 class="text-lg font-bold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for wedding inspiration and planning tips.</p>
+                    <form id="newsletter-form" class="space-y-4">
+                        <div>
+                            <input type="email" placeholder="Your Email Address" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 text-white">
+                        </div>
+                        <button type="submit" class="w-full gradient-button text-white px-4 py-2 rounded-lg transition-all">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2023 Arix & Co. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="bg-rose-400 hover:bg-rose-500 text-white rounded-full p-3 shadow-lg">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="modal-overlay absolute inset-0 bg-black opacity-50"></div>
+        <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-6 px-8">
+                <div class="flex justify-between items-center pb-4 border-b">
+                    <h3 class="text-xl font-bold text-gray-800">Thank You!</h3>
+                    <button class="modal-close text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="py-6">
+                    <div class="text-center mb-4">
+                        <div class="bg-green-100 inline-block rounded-full p-4 mb-4">
+                            <i class="fas fa-check text-green-500 text-3xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800 mb-2">Form Submitted Successfully!</h4>
+                        <p class="text-gray-600">We've received your information and will contact you shortly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const closeMenuButton = document.getElementById('close-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                mobileMenuOverlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                mobileMenuOverlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+            
+            mobileMenuOverlay.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                mobileMenuOverlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+            
+            // Navbar Scroll Effect
+            const navbar = document.getElementById('navbar');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-lg', 'py-2');
+                    navbar.classList.remove('py-3');
+                } else {
+                    navbar.classList.remove('shadow-lg', 'py-2');
+                    navbar.classList.add('py-3');
+                }
+            });
+            
+            // Smooth Scrolling for Anchor Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        e.preventDefault();
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (mobileMenu.classList.contains('active')) {
+                            mobileMenu.classList.remove('active');
+                            mobileMenuOverlay.classList.add('hidden');
+                            document.body.style.overflow = '';
+                        }
+                    }
+                });
+            });
+            
+            // Fade-in Animation on Scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = () => {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementBottom = element.getBoundingClientRect().bottom;
+                    
+                    if (elementTop < window.innerHeight - 100 && elementBottom > 0) {
+                        element.classList.add('active');
+                    }
+                });
+            };
+            
+            // Initial check on load
+            fadeInOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+            
+            // Gallery Lightbox
+            const galleryImages = document.querySelectorAll('.gallery-img');
+            const lightbox = document.getElementById('gallery-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const closeLightbox = document.querySelector('.close-lightbox');
+            
+            galleryImages.forEach(image => {
+                image.addEventListener('click', () => {
+                    const imgSrc = image.getAttribute('data-img');
+                    const imgTitle = image.getAttribute('data-title');
+                    
+                    lightboxImg.src = imgSrc;
+                    lightboxCaption.textContent = imgTitle;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeLightbox.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Testimonial Slider
+            const testimonialSlider = document.querySelector('.testimonial-slider');
+            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+            const testimonialDots = document.querySelectorAll('.testimonial-dot');
+            const prevButton = document.querySelector('.testimonial-prev');
+            const nextButton = document.querySelector('.testimonial-next');
+            
+            let currentSlide = 0;
+            const slideWidth = 100; // percentage
+            
+            function updateSlider() {
+                testimonialSlider.style.transform = `translateX(-${currentSlide * slideWidth / testimonialSlides.length}%)`;
+                
+                // Update dots
+                testimonialDots.forEach((dot, index) => {
+                    if (index === currentSlide) {
+                        dot.classList.add('bg-rose-300');
+                        dot.classList.remove('bg-gray-300');
+                    } else {
+                        dot.classList.remove('bg-rose-300');
+                        dot.classList.add('bg-gray-300');
+                    }
+                });
+            }
+            
+            prevButton.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + testimonialSlides.length) % testimonialSlides.length;
+                updateSlider();
+            });
+            
+            nextButton.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % testimonialSlides.length;
+                updateSlider();
+            });
+            
+            testimonialDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    updateSlider();
+                });
+            });
+            
+            // Auto slide testimonials
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % testimonialSlides.length;
+                updateSlider();
+            }, 5000);
+            
+            // Form Submission
+            const bookingForm = document.getElementById('booking-form');
+            const contactForm = document.getElementById('contact-form');
+            const newsletterForm = document.getElementById('newsletter-form');
+            const successModal = document.getElementById('success-modal');
+            const modalClose = document.querySelector('.modal-close');
+            const modalOverlay = document.querySelector('.modal-overlay');
+            
+            function showSuccessModal() {
+                successModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeSuccessModal() {
+                successModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+            
+            if (bookingForm) {
+                bookingForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // In a real application, you would send the form data to the server here
+                    // For this demo, we'll just show the success modal
+                    showSuccessModal();
+                    this.reset();
+                });
+            }
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // In a real application, you would send the form data to the server here
+                    // For this demo, we'll just show the success modal
+                    showSuccessModal();
+                    this.reset();
+                });
+            }
+            
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // In a real application, you would send the form data to the server here
+                    // For this demo, we'll just show the success modal
+                    showSuccessModal();
+                    this.reset();
+                });
+            }
+            
+            if (modalClose) {
+                modalClose.addEventListener('click', closeSuccessModal);
+            }
+            
+            if (modalOverlay) {
+                modalOverlay.addEventListener('click', closeSuccessModal);
+            }
+            
+            // Back to Top Button
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopButton.style.display = 'block';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+            
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'966d8ff7951e9905',t:'MTc1MzgwMjAyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+
+<form id="booking-form" action="process_booking.php" method="post" class="space-y-6">
